@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<policy type="and" name="Archive Original Video Preferred" license="CC-BY-SA-4.0+">
+  <description>Check to see if archive original born-digital video files meet preferred specifications</description>
+  <tag/>
+  <policy type="or" name="Container">
+    <description>camera native container?</description>
+    <tag/>
+    <rule name="AVCHD?" value="Format" tracktype="Video" occurrence="*" operator="=">AVCHD</rule>
+    <rule name="XAVC?" value="Format" tracktype="Video" occurrence="*" operator="=">XAVC</rule>
+    <rule name="MPEG-2?" value="CodecID" tracktype="Video" occurrence="*" operator="=">V_MPEG2</rule>
+    <policy type="and" name="container is MOV?">
+      <tag/>
+      <policy type="and" name="Format is MPEG-4 w/ QuickTime profile">
+        <tag/>
+        <rule name="Format is MPEG-4" value="Format" tracktype="Video" occurrence="*" operator="=">MPEG-4</rule>
+        <rule name="Format profile is QuickTime" value="Format_Profile" tracktype="Video" occurrence="*" operator="=">QuickTime</rule>
+      </policy>
+    </policy>
+  </policy>
+  <policy type="or" name="Video Codec">
+    <description>video codec is camera native format</description>
+    <tag/>
+    <rule name="H.264?" value="CodecID" tracktype="Video" occurrence="*" operator="=">H264</rule>
+    <rule name="MPEG-4?" value="CodecID" tracktype="Video" occurrence="*" operator="=">V_MPEG4/IS0/ASP</rule>
+  </policy>
+  <rule name="Chroma Subsampling" value="ChromaSubsampling" tracktype="Video" occurrence="*" operator="&gt;=">4:2:2</rule>
+  <rule name="Video Bit Depth" value="BitDepth" tracktype="Video" occurrence="*" operator="&gt;=">10</rule>
+  <rule name="Video Bit Rate" value="BitRate" tracktype="Video" occurrence="*" operator="&gt;=">20</rule>
+  <rule name="Frame Rate" value="FrameRate" tracktype="Video" occurrence="*" operator="&gt;=">29.970</rule>
+  <policy type="and" name="Frame Size">
+    <tag/>
+    <rule name="Frame Height is 1080p?" value="Height" tracktype="Video" occurrence="*" operator="=">1080</rule>
+    <rule name="Frame Width is 1920p?" value="Width" tracktype="Video" occurrence="*" operator="=">1920</rule>
+  </policy>
+  <policy type="and" name="Audio to spec?" license="CC-BY-SA-4.0+">
+    <tag/>
+    <rule name="Audio Bit Depth" value="BitDepth" tracktype="Audio" occurrence="*" operator="&gt;=">16</rule>
+    <rule name="Audio Sampling Rate" value="SamplingRate" tracktype="Audio" occurrence="*" operator="&gt;=">44100</rule>
+    <rule name="Audio Channels Stereo" value="Channels" tracktype="Audio" occurrence="*" operator="=">2</rule>
+    <policy type="or" name="Audio Codec" license="CC-BY-SA-4.0+">
+      <tag/>
+      <rule name="Audio is PCM?" value="Format" tracktype="Audio" occurrence="*" operator="=">PCM </rule>
+      <rule name="Audio is AC-3?" value="Format" tracktype="Audio" occurrence="*" operator="=">AC-3</rule>
+      <rule name="Audio is AIFF? " value="CodecID" tracktype="Audio" occurrence="*" operator="=">AIFF</rule>
+    </policy>
+  </policy>
+</policy>
