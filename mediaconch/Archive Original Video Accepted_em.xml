@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<policy type="and" name="Archive Original Video Accepted_em" license="CC-BY-SA-4.0+">
+  <description>Check to see if archive original born-digital video files meet preferred specifications.</description>
+  <tag/>
+  <policy type="or" name="Container">
+    <description>camera native container?</description>
+    <tag/>
+    <policy type="or" name="container is MOV?">
+      <tag/>
+      <policy type="and" name="Format is MPEG-4 w/ QuickTime profile">
+        <tag/>
+        <rule name="Format is MPEG-4" value="Format" tracktype="General" occurrence="*" operator="=">MPEG-4</rule>
+        <rule name="Format profile is QuickTime?" value="Format_Profile" tracktype="General" occurrence="*" operator="=">QuickTime</rule>
+      </policy>
+      <rule name="Format is MOV?" value="Format" tracktype="General" occurrence="*" operator="=">mov</rule>
+    </policy>
+    <rule name="MPEG-4?" value="Format" tracktype="General" occurrence="*" operator="=">MPEG-4</rule>
+    <rule name="MPEG-PS?" value="Format" tracktype="General" occurrence="*" operator="=">MPEG-PS</rule>
+  </policy>
+  <policy type="or" name="Video Codec">
+    <description>video codec is camera native format</description>
+    <tag/>
+    <rule name="H.264?" value="CodecID" tracktype="Video" occurrence="*" operator="=">H264</rule>
+    <rule name="AVCHD?" value="Format" tracktype="Video" occurrence="*" operator="=">AVCHD</rule>
+    <rule name="XAVC?" value="Format" tracktype="Video" occurrence="*" operator="=">XAVC</rule>
+    <rule name="MPEG-2?" value="CodecID" tracktype="Video" occurrence="*" operator="=">V_MPEG2</rule>
+    <rule name="ProRes?" value="Format" tracktype="Video" occurrence="*" operator="=">ProRes</rule>
+    <rule name="MPEG Video?" value="CodecID" tracktype="Video" occurrence="*" operator="=">MPEG video</rule>
+    <rule name="xd5f?" value="CodecID" tracktype="Video" occurrence="*" operator="=">xd5f</rule>
+    <rule name="AVC?" value="CodecID" tracktype="Video" occurrence="*" operator="=">AVC</rule>
+    <rule name="avc1?" value="CodecID" tracktype="Video" occurrence="*" operator="=">avc1</rule>
+    <rule name="xdvd?" value="CodecID" tracktype="Video" occurrence="*" operator="=">xdvd</rule>
+    <rule name="xdvf?" value="CodecID" tracktype="Video" occurrence="*" operator="=">xdvf</rule>
+    <rule name="xdvb?" value="CodecID" tracktype="Video" occurrence="*" operator="=">xdvb</rule>
+  </policy>
+  <policy type="and" name="Audio to spec?">
+    <tag/>
+    <policy type="or" name="Audio Codec">
+      <tag/>
+      <rule name="Audio is PCM?" value="Format" tracktype="Audio" occurrence="*" operator="=">PCM</rule>
+      <rule name="Audio is AC-3?" value="Format" tracktype="Audio" occurrence="*" operator="=">AC-3</rule>
+      <rule name="Audio is AIFF? " value="CodecID" tracktype="Audio" occurrence="*" operator="=">AIFF</rule>
+      <rule name="Audio is AAC?" value="CodecID" tracktype="Audio" occurrence="*" operator="=">aac </rule>
+      <rule name="Audio is MP4a?" value="CodecID" tracktype="Audio" occurrence="*" operator="=">mp4a-40-2</rule>
+      <rule name="Audio Format does not exist?" value="Format" tracktype="Audio" occurrence="*" operator="must not exist">10</rule>
+      <rule name="Audio Codec does not exist?" value="CodecID" tracktype="Audio" occurrence="*" operator="must not exist">10</rule>
+    </policy>
+    <policy type="or" name="Audio Channels">
+      <tag/>
+      <rule name="Audio Channels Stereo" value="Channels" tracktype="Audio" occurrence="*" operator="=">2</rule>
+      <rule name="Audio Channels Mono" value="Channels" tracktype="Audio" occurrence="*" operator="=">1</rule>
+      <rule name="Audio Channels does not exist?" value="Channels" tracktype="Audio" occurrence="*" operator="must not exist">10</rule>
+    </policy>
+    <policy type="or" name="Audio Bit Depth">
+      <description>Test audio bit depth only if it exists.</description>
+      <tag/>
+      <rule name="Audio Bit Depth does not exist?" value="BitDepth" tracktype="Audio" occurrence="*" operator="must not exist">10</rule>
+      <rule name="Audio Bit Depth" value="BitDepth" tracktype="Audio" occurrence="*" operator="&gt;=">16</rule>
+    </policy>
+    <policy type="or" name="Audio Sampling Rate">
+      <description>Test audio sampling rate only if it exists.</description>
+      <tag/>
+      <rule name="Audio Sampling Rate does not exist?" value="SamplingRate" tracktype="Audio" occurrence="*" operator="must not exist">10</rule>
+      <rule name="Audio Sampling Rate" value="SamplingRate" tracktype="Audio" occurrence="*" operator="&gt;=">44100</rule>
+    </policy>
+  </policy>
+  <policy type="and" name="Video Characteristics">
+    <tag/>
+    <rule name="Video Bit Rate" value="BitRate" tracktype="Video" occurrence="*" operator="&gt;=">20</rule>
+    <policy type="or" name="Frame Height">
+      <description>Frame Height is within range</description>
+      <tag/>
+      <rule name="Frame Height is at least 1080?" value="Height" tracktype="Video" occurrence="*" operator="&gt;=">1080</rule>
+      <rule name="Frame Height is at least 720?" value="Height" tracktype="Video" occurrence="*" operator="&gt;=">720</rule>
+      <rule name="Frame Height is at least 480?" value="Height" tracktype="Video" occurrence="*" operator="&gt;=">480</rule>
+      <rule name="Frame Height is 240?" value="Height" tracktype="Video" occurrence="*" operator="=">240</rule>
+    </policy>
+    <policy type="or" name="Chroma Subsampling">
+      <tag/>
+      <rule name="Chroma Subsampling is 4:2:2?" value="ChromaSubsampling" tracktype="Video" occurrence="*" operator="=">4:2:2</rule>
+      <rule name="Chroma Subsampling is 4:4:4?" value="ChromaSubsampling" tracktype="Video" occurrence="*" operator="=">4:4:4</rule>
+      <rule name="Chroma Subsampling is 4:2:0?" value="ChromaSubsampling" tracktype="Video" occurrence="*" operator="=">4:2:0</rule>
+    </policy>
+    <policy type="or" name="Video Bit Depth">
+      <description>Test video bit depth only if it exists.</description>
+      <tag/>
+      <rule name="Video Bit Depth does not exist?" value="BitDepth" tracktype="Video" occurrence="*" operator="must not exist">10</rule>
+      <rule name="Video Bit Depth is at least 10?" value="BitDepth" tracktype="Video" occurrence="*" operator="&gt;=">10</rule>
+      <rule name="Video Bit Depth is at least 8?" value="BitDepth" tracktype="Video" occurrence="*" operator="&gt;=">8</rule>
+    </policy>
+    <policy type="or" name="Frame Rate?">
+      <description>Frame rate is within range</description>
+      <tag/>
+      <rule name="Frame Rate is at least 25?" value="FrameRate" tracktype="Video" occurrence="*" operator="&gt;=">25.000</rule>
+      <rule name="Frame Rate is 24?" value="FrameRate" tracktype="Video" occurrence="*" operator="=">24.000</rule>
+      <rule name="Frame Rate is 23.976?" value="FrameRate" tracktype="Video" occurrence="*" operator="=">23.976</rule>
+    </policy>
+    <policy type="or" name="Frame Width">
+      <description>Frame width is within range</description>
+      <tag/>
+      <rule name="Frame Width is at least 1920?" value="Width" tracktype="Video" occurrence="*" operator="&gt;=">1920</rule>
+      <rule name="Frame Width is at least 1280?" value="Width" tracktype="Video" occurrence="*" operator="&gt;=">1280</rule>
+      <rule name="Frame Width is at least 1901?" value="Width" tracktype="Video" occurrence="*" operator="&gt;=">1901</rule>
+      <rule name="Frame Width is at least 720?" value="Width" tracktype="Video" occurrence="*" operator="&gt;=">720</rule>
+      <rule name="Frame Width is at least 848?" value="Width" tracktype="Video" occurrence="*" operator="&gt;=">848</rule>
+      <rule name="Frame Width is 426?" value="Width" tracktype="Video" occurrence="*" operator="=">426</rule>
+      <rule name="Frame Width is at least 872?" value="Width" tracktype="Video" occurrence="*" operator="&gt;=">872</rule>
+      <rule name="Frame Width is at least 1440?" value="Width" tracktype="Video" occurrence="*" operator="&gt;=">1440</rule>
+    </policy>
+  </policy>
+</policy>
