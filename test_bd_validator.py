@@ -12,7 +12,7 @@ def test_is_package_bag(good_package):
 
 def test_expected_folders_present(good_package):
     #a list of approved directory names for package structure
-    expected = ['ArchiveOriginals', 'EditMasters','ServiceCopies','Images','Transcripts','Captions','Releases'] 
+    expected = ['ArchiveOriginals', 'EditMasters','ServiceCopies','Images','Transcripts','Captions','Releases', 'Project Files'] 
     #the subdirectories present in the source package
     present = bv.get_structure(good_package)
 
@@ -23,8 +23,8 @@ def test_expected_folders_present(good_package):
     #notes: compensating for incorrect spelling, is the function to hard coded?
 
 # def test_expected_folders_match_package_contents(good_package):
-    present = bv.get_structure(good_package)
-    filetypes = {'ao':'ArchiveOriginals', 'em':'EditMasters','sc':'ServiceCopies','Images','Transcripts','Captions','Releases'}
+#    present = bv.get_structure(good_package)
+ #   filetypes = {'ao':'ArchiveOriginals', 'em':'EditMasters','sc':'ServiceCopies','Images','Transcripts','Captions','Releases', 'Project Files'}
 
 # def arguments_capture_valid_package_path(good_package)
 
