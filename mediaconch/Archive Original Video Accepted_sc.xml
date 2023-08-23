@@ -108,5 +108,6 @@
       <rule name="Audio Sampling Rate does not exist?" value="SamplingRate" tracktype="Audio" occurrence="*" operator="must not exist">10</rule>
       <rule name="Audio Sampling Rate" value="SamplingRate" tracktype="Audio" occurrence="*" operator="&gt;=">44100</rule>
     </policy>
+    <rule name="Audio more than one track?" value="ID" tracktype="Audio" occurrence="2" operator="must not exist">10</rule>
   </policy>
 </policy>
