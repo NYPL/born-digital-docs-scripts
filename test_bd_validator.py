@@ -6,25 +6,39 @@ from pathlib import Path
 def good_package():
     return Path("fixtures/simple_video_pk")
 
+@pytest.fixture
+def good_structure(good_package):
+    return bv.get_structure(good_package)
+
 def test_is_package_bag(good_package):
     result = bv.is_valid_bag(good_package)
     assert result is True
 
-def test_expected_folders_present(good_package):
-    #a list of approved directory names for package structure
-    expected = ['ArchiveOriginals', 'EditMasters','ServiceCopies','Images','Transcripts','Captions','Releases', 'Project Files'] 
-    #the subdirectories present in the source package
-    present = bv.get_structure(good_package)
+def test_expected_folders_present(good_structure):
+    result = bv.valid_structure(good_structure)
+    assert result
 
-    #compare present list to expected
-    for item in present:
-        assert item.name in expected
+def test_warning_unexpected_folder(good_structure):
+    good_structure.append(Path('unknown_folder')) #not sure if this is correct
+    result = bv.valid_structure(good_structure)
+    assert not result
 
-    #notes: compensating for incorrect spelling, is the function to hard coded?
+def test_required_folders_present(good_structure):
+    # do we have these?
+    assert False
+
+
+def test_warn_on_required_folders_missing(good_structure):
+    # do we have these?
+    assert False
+
+    
+
 
 # def test_expected_folders_match_package_contents(good_package):
-#    present = bv.get_structure(good_package)
- #   filetypes = {'ao':'ArchiveOriginals', 'em':'EditMasters','sc':'ServiceCopies','Images','Transcripts','Captions','Releases', 'Project Files'}
+#   present = bv.get_structure(good_package) 
+    assert result
+#   filetypes = {'ArchiveOriginals':'ao', 'EditMasters':'em','ServiceCopies':'sc','Images':['.jpg','.JPEG','.tif','.tiff'],'Transcripts':['.pdf'],'Captions','Releases', 'Project Files'}
 
 # def arguments_capture_valid_package_path(good_package)
 
