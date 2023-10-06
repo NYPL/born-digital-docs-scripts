@@ -3,6 +3,7 @@ from pathlib import Path
 import bagit 
 import argparse
 import logging
+import re
 
 
 def parse_args():
@@ -62,8 +63,8 @@ def get_structure(package: pathlib.Path) -> list:
         else:
             meta.append(item.name)
     
-    print(contents)
-    print(f'the following files are on the first level: {meta}')
+    #print(contents)
+    #print(f'the following files are on the first level: {meta}')
     return contents
     
 
@@ -87,25 +88,63 @@ def valid_structure(contents: list[Path]) -> bool:
 
 def get_files(package: pathlib.Path) -> list:
     all_items = Path(package).rglob("*")
-    all_files = [x for x in all_items if x.is_file()]            
-    print(all_files)
-    return all_files
+    all_files = [x for x in all_items if x.is_file()]
+    files_dict = []
+    for file in all_files:
+        dict ={'name':file.name,
+            'strpath':file.absolute(),
+            'pospath':file}
+        files_dict.append(dict)           
+    # print(test)
+    return files_dict
 
 #check to see the expected folders are in package based on file extension
-def validate_approriate_folders():
-    return True
+def validate_folder_content_types(files_dict):
+    types = {"_ao":"ArchiveOriginals",
+             "_em":"EditMasters",
+             "_sc":"ServiceCopies",
+             "_pm":"PreservationMasters"}
 
-#check to see files are in appropriate folders:
-def validate_folders_file_match():
-    return True
+    # dict ={'name': file.name,
+    #         'path':file}
+
+    inspect =[]
+
+    # for item in files_dict:
+    #     for key in types:
+    #         if re.search(key, files_dict['name']):
+    #             print(f'{files_dict["name"]} is {types[key]}')
+
+    for item in files_dict:
+        for key in types:
+            if re.search(key, item['name']) and re.search(types[key], item['strpath']):
+                print(f'{item["name"]} is in {types[key]} as expected')
+            else:
+                inspect.append(item)
+    
+    # for item in inspect:
+    #     print(f'what is this?: {item}')
+
+#if this works, try with not and result = true/false as written below
+    # result = True
+    # for item in contents:
+    #     if not item.name in expected:
+    #         result = False
+            
+    # return result
+
+# #check to see files are in appropriate folders:
+# def validate_folders_file_match():
+#     return True
 
 def main():
     args = parse_args()
     print(args)
+    #for loop for accessing namespace list of one or more
     for source in args.packages:
-        print(source)
         folders = get_structure(source)
-        all_files  = get_files(source)
+        files  = get_files(source)
+        validate_folder_content_types(files)
 
 
 if __name__ == '__main__':

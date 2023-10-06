@@ -40,6 +40,10 @@ def test_warn_on_required_folders_missing(good_structure):
     assert result
 #   filetypes = {'ArchiveOriginals':'ao', 'EditMasters':'em','ServiceCopies':'sc','Images':['.jpg','.JPEG','.tif','.tiff'],'Transcripts':['.pdf'],'Captions','Releases', 'Project Files'}
 
+#@pytest.parametrize(filetypes)
+# def test_warn_on_folder_file_mismatch(good_package, filetypes):
+    # corrupt one folder at a time and get the right warning message
+
 # def arguments_capture_valid_package_path(good_package)
 
 #def arguments_capture_valid_directory_paths(good_package)
