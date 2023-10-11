@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "born-digital-docs-scripts"
+version = "0.1.0"
+description = ""
+authors = ["dreyjo <59994482+dreyjo@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "born_digital_docs_scripts", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
