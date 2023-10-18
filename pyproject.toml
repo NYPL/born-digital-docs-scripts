@@ -8,7 +8,12 @@ packages = [{include = "born_digital_docs_scripts", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+bagit = "^1.8.1"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+nox = "^2023.4.22"
 
 [build-system]
 requires = ["poetry-core"]
