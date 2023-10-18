@@ -8,3 +8,8 @@ def py_tests(session):
 
     for v in versions:
         session.run("pytest")
+
+@nox.session(python=versions)
+def lint(session):
+    session.install("flake8")
+    session.run("flake8")
