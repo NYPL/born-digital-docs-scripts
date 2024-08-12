@@ -1,0 +1,6 @@
+# Mac/Windows System Files
+.DS_Store
+._*
+Icon
+.python-version
+__pycache__/
