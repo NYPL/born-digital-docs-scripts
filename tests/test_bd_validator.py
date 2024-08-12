@@ -7,7 +7,7 @@ import born_digital_docs_scripts.bd_validator as bv
 
 @pytest.fixture
 def good_package():
-    return Path("fixtures/simple_video_pk")
+    return Path("tests/fixtures/simple_video_pk")
 
 
 @pytest.fixture
@@ -42,10 +42,19 @@ def test_warn_on_required_folders_missing(good_structure):
 
     # def test_expected_folders_match_package_contents(good_package):
     #   present = bv.get_structure(good_package)
-    assert result
+    # assert result
 
 
-#   filetypes = {'ArchiveOriginals':'ao', 'EditMasters':'em','ServiceCopies':'sc','Images':['.jpg','.JPEG','.tif','.tiff'],'Transcripts':['.pdf'],'Captions','Releases', 'Project Files'}
+filetypes = {
+    "ArchiveOriginals": "ao",
+    "EditMasters": "em",
+    "ServiceCopies": "sc",
+    "Images": [".jpg", ".JPEG", ".tif", ".tiff"],
+    "Transcripts": [".pdf"],
+    "Captions": "",
+    "Releases": "",
+    "Project Files": "",
+}
 
 # @pytest.parametrize(filetypes)
 # def test_warn_on_folder_file_mismatch(good_package, filetypes):

@@ -6,7 +6,6 @@ from pathlib import Path
 
 import bagit
 
-
 def parse_args():
     # validate and return paths for main directory and subdirs
     def main_dir(arg):
