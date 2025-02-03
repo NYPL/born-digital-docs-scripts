@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-import born_digital_docs_scripts.bd_validator as bv
+import born_digital_docs_scripts.lint_bdami as bd
 
 
 @pytest.fixture
@@ -12,22 +12,22 @@ def good_package():
 
 @pytest.fixture
 def good_structure(good_package):
-    return bv.get_structure(good_package)
+    return bd.get_structure(good_package)
 
 
 def test_is_package_bag(good_package):
-    result = bv.is_valid_bag(good_package)
+    result = bd.is_valid_bag(good_package)
     assert result is True
 
 
 def test_expected_folders_present(good_structure):
-    result = bv.valid_structure(good_structure)
+    result = bd.valid_structure(good_structure)
     assert result
 
 
 def test_warning_unexpected_folder(good_structure):
     good_structure.append(Path("unknown_folder"))  # not sure if this is correct
-    result = bv.valid_structure(good_structure)
+    result = bd.valid_structure(good_structure)
     assert not result
 
 
