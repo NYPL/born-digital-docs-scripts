@@ -6,8 +6,40 @@ import born_digital_docs_scripts.lint_bdami as bd
 
 
 @pytest.fixture
-def good_package():
-    return Path("fixtures/simple_video_pk")
+def good_package(tm_path: Path):
+    pkg = tmp_path.joinpath("fixtures/simple_bdami_pk")
+    #pkg = tmp_path.joinpath("fixtures/ncov1234")
+
+    ao_folder = pkg.joinpath("data/ArchiveOriginals")
+    ao_folder.mkdir(parents=True)
+    #here add a fake video but also a folder with a couple levels
+
+    em_folder = pkg.joinpath("data/EditMasters")
+    em_folder.mkdir(parents=True)
+
+    sc_folder = pkg.joinpath("data/ServiceCopies")
+    sc_folder.mkdir(parents=True)
+    
+
+    ao_filepath = ao_folder.joinpath("myd_mgzidf123456_v01_ao.mp4")
+    ao_folderpath = ao_folder.joinpath("/myd_mgzidf123456_v01_ao/CLIPS")
+    ao_mxf = ao_folderpath.joinpath("myd_mgzidf123456_v01_ao.mp4")
+    ao_xml = ao_folderpath.joinpath("myd_mgzidf123456_v01_ao.xml")
+    ao_bpav = 
+
+
+    em_filepath = em_folder.joinpath("myd_mgzidf123456_v01_em.mov")
+    sc_filepath = sc_folder.joinpath("myd_mgzidf123456_v01_sc.mp4")
+
+    for file in [
+        ao_filepath,
+        em_filepath,
+        sc_filepath,
+        (pkg/"bagit.txt"),
+        (pkg/"manifest-md5.txt")
+    ]
+
+    return pkg
 
 
 @pytest.fixture
