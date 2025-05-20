@@ -112,6 +112,8 @@ def files_named_correctly(package, dir_name, ending) -> bool:
     dir = (package / dir_name)
     if dir.exists():
         contents = dir.rglob("*")
+    #else:
+        #Logger Error could not check folder, folder does not exist
 
     expected = False
     for item in contents:
